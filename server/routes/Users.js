@@ -48,4 +48,14 @@ router.post('/login', async (req, res) => {
     });
 });
 
+router.get('/byGroup/:id', async (req, res) => {
+    const groupId = req.params.id;
+    const users = await Users.findAll({
+        where: {
+            GroupId: groupId
+        }
+    });
+    res.json(users);
+})
+
 module.exports = router;

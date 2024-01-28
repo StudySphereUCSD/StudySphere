@@ -9,6 +9,7 @@ import { FindGroup } from './pages/FindGroup';
 import { Chat } from './pages/Chat';
 import { VideoCall } from './pages/VideoCall';
 import { Dashboard } from './pages/Dashboard';
+import { Group } from './pages/Group';
 
 
 
@@ -22,6 +23,7 @@ export const App = () => {
         <Route path="/findgroup" element={<FindGroup />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/videocall" element={<VideoCall />} />
+        <Route path="/group/:id" element={<Group />} />
 
       </Routes>
     </BrowserRouter>

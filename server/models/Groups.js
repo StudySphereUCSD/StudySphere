@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'cascade',
         });
     };
+
+    Groups.associate = (models) => {
+        Groups.hasMany(models.Users, {});
+    };
     
     return Groups;
 };

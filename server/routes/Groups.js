@@ -38,4 +38,14 @@ router.get('/byLeader/:name', async (req, res) => {
     res.json(groups);
 });
 
+router.get('/byUser/:id', async (req, res) => {
+    const userId = req.params.id;
+    const groups = await Groups.findAll({
+        where: {
+            UserId: userId
+        }
+    });
+    res.json(groups);
+})
+
 module.exports = router;

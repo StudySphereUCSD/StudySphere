@@ -15,9 +15,9 @@ export const Dashboard = () => {
     const [ groups, setGroups ] = useState([]);
     const location = useLocation();
     const { name, email, picture } = location.state || {};
-    const userName = 'jihun1';
+    const userId = 1;
     useEffect(() => {
-        axios.get(`http://localhost:3001/groups/byLeader/${userName}`).then((res) => {
+        axios.get(`http://localhost:3001/groups/byUser/${userId}`).then((res) => {
             setGroups(res.data);
         })
     }, []);
