@@ -20,6 +20,7 @@ export const FindGroup = () => {
         <div>
             <NavBar />
             <h1>FindGroup</h1>
+            <div className="groupContainerWrapper">
             {groupList.map((group, key) => {
                 return (
                     <div 
@@ -34,11 +35,12 @@ export const FindGroup = () => {
                             <p className = 'info'>Major: {group.major}</p>
                             <p className = 'info'>Subject: {group.subject}</p>
                             <p className = 'info'>Grade Level: {group.gradeLevel}</p>
-                            <p className = 'info'>Leader: {group.leader}</p>
+                            {/* <p className = 'info'>Leader: {group.leader}</p> */}
                         </div>
                     </div>
                 );
             })}
+            </div>
         </div>
     );
 }
