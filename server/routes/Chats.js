@@ -21,11 +21,17 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/:groupId', async (req, res) => {
-    const id = req.params.groupId;
-    const chatList = await Chats.findAll({
-        where: {GroupId: id}
-    });
-    res.json(chatList);
+    const groupId = req.params.groupId;
+    try {
+        const chatList = await Chats.findAll({
+            where: { GroupId: groupId }
+            // If you need to include more details (like user info), you can use 'include'
+        });
+        res.json(chatList);
+    } catch (error) {
+        // It's good practice to handle errors
+        res.status(500).send(error.message);
+    }
 });
 
 module.exports = router;
