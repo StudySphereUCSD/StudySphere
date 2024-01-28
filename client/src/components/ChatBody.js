@@ -5,6 +5,18 @@ const ChatBody = ({ socket, selectedGroupId }) => {
     const [chats, setChats] = useState([]);
     const [me, setMe] = useState(null);
 
+    useEffect(() => {
+        const receiveMessage = (newMessage) => {
+            setChats(currentChats => [...currentChats, newMessage]);
+        };
+
+        socket.on('new message', receiveMessage);
+
+        return () => {
+            socket.off('new message', receiveMessage);
+        };
+    }, [socket]);
+
     // Fetch user data with UserId 1 from your API and set "me"
     useEffect(() => {
         axios.get(`http://localhost:3001/users/1`)
@@ -37,7 +49,7 @@ const ChatBody = ({ socket, selectedGroupId }) => {
             </header>
 
             <div className="message__container">
-                <p>{selectedGroupId}</p>
+
 
                 {chats.map((chat) => {
                     const isMe = chat.name === me;

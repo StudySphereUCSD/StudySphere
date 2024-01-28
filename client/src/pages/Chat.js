@@ -7,7 +7,7 @@ import './Chat.css';
 import ChatBar from '../components/ChatBar';
 import ChatBody from '../components/ChatBody';
 import ChatFooter from '../components/ChatFooter';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 const socket = io.connect("http://localhost:3001");
@@ -28,7 +28,7 @@ export const Chat = () => {
                 <ChatBar socket={socket} setSelectedGroupId={setSelectedGroupId} />
                 <div className="chat__main">
                     <ChatBody socket={socket} selectedGroupId={selectedGroupId} />
-                    <ChatFooter socket={socket} />
+                    <ChatFooter socket={socket} selectedGroupId={selectedGroupId} />
                 </div>
             </div>
 

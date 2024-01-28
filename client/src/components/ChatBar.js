@@ -15,8 +15,8 @@ const ChatBar = ({ socket, setSelectedGroupId }) => {
     }, [socket]);
 
     const handleGroupClick = (groupId) => {
-        setSelectedGroupId(groupId); // This updates the selected group in the parent component
-
+        setSelectedGroupId(groupId);
+        socket.emit('join group', groupId); // Emitting an event when a group is selected
     };
 
 

@@ -8,23 +8,35 @@ const db = require('./models');
 app.use(cors());
 app.use(express.json());
 const server = http.createServer(app);
-
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
-        // methods: ["GET", "POST"],
-    },
+        origin: "http://localhost:3000"
+    }
 });
-io.on("connection", (socket) => {
-    console.log(`User Connected: ${socket.id}`);
 
-    socket.on("join_room", (data) => {
-        socket.join(data);
+// const socketIO = require('socket.io')(http, {
+//     cors: {
+//         origin: "http://localhost:3000"
+//     }
+// });
+
+//Add this before the app.get() block
+io.on('connection', (socket) => {
+    console.log('a user connected');
+
+    socket.on('chat message', (msg) => {
+        // Broadcast the message to other users in the same group
+        io.to(msg.GroupId).emit('new message', msg);
     });
-    socket.on("send_message", (data) => {
-        socket.to(data.room).emit("receive_message", data);
+
+    socket.on('join group', (groupId) => {
+        socket.join(groupId);
+        // Additional logic for joining a group
     });
+
+    // Other event handlers...
 });
+
 
 const setupServer = async () => {
     // Set up routes
@@ -38,7 +50,7 @@ const setupServer = async () => {
     app.use('/groupsUsers', groupUserRouter);
 
     app.get('/', (req, res) => {
-    res.send("Main page");
+        res.send("Main page");
     });
 
     // const Users = sequelize.import('./models/Users');
