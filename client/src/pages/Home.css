@@ -1,5 +1,7 @@
 .main {
+    display: block;
     text-align: center;
+
 
 }
 
@@ -11,7 +13,7 @@
 
 
 .logo2 {
-    margin-top: 20px;
+    margin-top: 40px;
     height: 26vmin;
 
 

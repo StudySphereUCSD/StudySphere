@@ -14,12 +14,12 @@
     transform: translateY(-5px);
 }
 
-.groupContainer>h3{
-    margin-left:80px;
+.groupContainer>h3 {
+    margin-left: 80px;
 }
 
 .infoContainer {
-    margin-left:20px;
+    margin-left: 20px;
     background-color: rgb(255, 255, 255);
     width: 180px;
     height: 120px;
@@ -37,7 +37,7 @@ body {
     z-index: 999;
 }
 
-h1{
+.Find-group-text {
     margin-top: 50px;
     margin-left: 45vw;
 }
@@ -45,6 +45,8 @@ h1{
 .groupContainerWrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centers the items horizontally */
-    gap: 20px; /* Optional: adds space between items */
+    justify-content: center;
+    /* Centers the items horizontally */
+    gap: 20px;
+    /* Optional: adds space between items */
 }

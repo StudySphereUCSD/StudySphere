@@ -4,8 +4,9 @@ import './NavBar.css';
 import { SlHome } from "react-icons/sl";
 import { SlCompass } from "react-icons/sl";
 import { SlBubbles } from "react-icons/sl";
-import { googleLogout} from '@react-oauth/google';
+import { googleLogout } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
+import { SlPlus } from "react-icons/sl";
 
 export const NavBar = () => {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ export const NavBar = () => {
 
             <div className='buttons'>
                 <button className='logout-button' onClick={logOut}>Log Out</button>
-                <button className='create-button' onClick={create}>Create New Group</button>
+                <button className='logout-button' onClick={create}>Create Group</button>
 
                 <a href="/dashboard"><SlHome /></a>
                 <a href="/findgroup"><SlCompass /></a>

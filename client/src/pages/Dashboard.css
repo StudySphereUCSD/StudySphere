@@ -8,6 +8,7 @@
 }
 
 .profile>h1 {
+    margin-left: 10px;
     font-size: 32px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -100,22 +101,22 @@
     padding-top: 5px;
     padding-bottom: 5px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: 10px;
+
 }
 
-.groupContainerBox{
+.groupContainerBox {
     background-color: rgb(245, 245, 245);
     padding: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     width: 150px;
     height: 30px;
     margin: 10px;
-    border-radius:20px;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 240px;
+
     transition: background-color 0.5s ease, transform 0.5s ease;
     background-color: initial;
 }
@@ -125,8 +126,8 @@
     transform: translateY(-5px);
 }
 
-.groupbox{
-    margin:auto;
+.groupbox {
+    margin: auto;
 }
 
 .stat {
@@ -170,7 +171,7 @@
     display: flex;
 
     /* background-color: #565555; */
-    margin-top: 20px;
+    margin-top: 35px;
     margin-right: 60px;
     width: 43%;
     float: right;
@@ -187,6 +188,13 @@
     font-size: 25px;
     margin-top: 15px;
     margin-left: 20px;
+
+}
+
+.myGroup h2 {
+    font-size: 25px;
+    margin-top: 15px;
+    margin-left: 10px;
 
 }
 

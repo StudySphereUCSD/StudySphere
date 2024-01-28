@@ -7,7 +7,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
-
+import { SlSocialGoogle } from "react-icons/sl";
 
 
 const responseOutput = (response) => {
@@ -44,8 +44,8 @@ const errorOutput = (error) => {
 
 export const Login = () => {
     const navigate = useNavigate();
-    const [ user, setUser ] = useState([]);
-    const [ profile, setProfile ] = useState([]);
+    const [user, setUser] = useState([]);
+    const [profile, setProfile] = useState([]);
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
@@ -68,16 +68,18 @@ export const Login = () => {
                     .then((res) => {
                         setProfile(res.data);
                         sendToServer(res.data);
-                        navigate('/dashboard', { state: { 
-                            name: res.data.name, 
-                            email: res.data.email,
-                            picture: res.data.picture
-                        } });
+                        navigate('/dashboard', {
+                            state: {
+                                name: res.data.name,
+                                email: res.data.email,
+                                picture: res.data.picture
+                            }
+                        });
                     })
                     .catch((err) => console.log(err));
             }
         },
-        [ user ]
+        [user]
     );
 
     const sendToServer = (userInfo) => {
@@ -108,9 +110,7 @@ export const Login = () => {
 
                 <a className='button' href="/"> <SlArrowLeft /> &nbsp; Back to main page</a>
             </div>
-            <h2>React Google Login</h2>
-            <br />
-            <br />
+
             {profile ? (
                 <div>
                     <img src={profile.picture} alt="user image" />
@@ -126,7 +126,7 @@ export const Login = () => {
                     <img className='biglogo' src={Logo2} alt="" />
                     <h2>Welcome to STUDYSPHERE!</h2>
                     <div className='logbutton'>
-                        <button onClick={() => login()}>Sign in with Google 🚀 </button>
+                        <button className='google-login-button' onClick={() => login()}><SlSocialGoogle />  &nbsp;SIGN IN WITH GOOGLE</button>
                     </div>
                 </div>
             )}
