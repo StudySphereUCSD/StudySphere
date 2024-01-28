@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavBar } from '../components/NavBar';
 import './Dashboard.css'
 import { SlPencil } from "react-icons/sl";
@@ -9,10 +9,14 @@ import {
     VictoryBar, VictoryChart, VictoryAxis,
     VictoryTheme
 } from 'victory';
+import { SlPlus } from "react-icons/sl";
+import { Timer } from '../components/Timer';
+import { TimerSetting } from '../components/TimerSetting';
+import SettingsContext from '../components/SettingsContext';
 
 
 export const Dashboard = () => {
-    const [ groups, setGroups ] = useState([]);
+    const [groups, setGroups] = useState([]);
     const location = useLocation();
     const { name, email, picture } = location.state || {};
     const userId = 1;
@@ -21,6 +25,10 @@ export const Dashboard = () => {
             setGroups(res.data);
         })
     }, []);
+    const [showSettings, setShowSettings] = useState(false);
+    const [studyMinuites, setStudyMinuites] = useState(45);
+    const [breakMinuites, setBreakMinuites] = useState(15);
+
 
     const data = [
         { weekday: 1, hours: 6 },
@@ -64,18 +72,19 @@ export const Dashboard = () => {
             </div>
             <div className='myGroup'>
                 <h2>My Groups</h2>
+                <button className='addGroup'><SlPlus /></button>
                 {groups.map((group, key) => {
-                return (
-                    <div className = 'temp'  key={group.id}>
-                        <h3 className = 'temp' >{group.groupName}</h3>
-                        <div className = 'temp' >
-                            <p className = 'temp' >Major: {group.major}</p>
-                            <p className = 'temp' >Subject: {group.subject}</p>
-                            <p className = 'temp' >Grade Level: {group.gradeLevel}</p>
-                            <p className = 'temp' >Leader: {group.leader}</p>
+                    return (
+                        <div className='temp' key={group.id}>
+                            <h3 className='temp' >{group.groupName}</h3>
+                            <div className='temp' >
+                                <p className='temp' >Major: {group.major}</p>
+                                <p className='temp' >Subject: {group.subject}</p>
+                                <p className='temp' >Grade Level: {group.gradeLevel}</p>
+                                <p className='temp' >Leader: {group.leader}</p>
+                            </div>
                         </div>
-                    </div>
-                );
+                    );
                 })}
             </div>
             <div className='stat'>
@@ -125,6 +134,27 @@ export const Dashboard = () => {
                     />
                 </VictoryChart>
             </div>
+
+            <div className='timer' >
+                <div className='timer-containers'>
+                    <h2>Study Timer</h2>
+
+                    <SettingsContext.Provider value={{
+                        showSettings,
+                        setShowSettings,
+                        studyMinuites,
+                        breakMinuites,
+                        setStudyMinuites,
+                        setBreakMinuites
+                    }}>
+
+                        {showSettings ? <TimerSetting /> : <Timer />}
+                    </SettingsContext.Provider>
+                </div>
+                <div className='line' />
+
+            </div>
+
 
         </div>
 

@@ -10,23 +10,36 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    //const user = req.body;
-    const { name, email} = req.body;
-    // bcrypt.hash(password, 10).then((hash)=>{
-    //     Users.create({
-    //         username: username,
-    //         password: hash,
-    //         email: email,
-    //         gradeLevel: gradeLevel,
-    //         gender: gender
-    //     });
-    // })
-    Users.create({
-        name: name,
-        email: email
-    });
-    res.json(name);
+    const { name, email } = req.body;
+
+    try {
+        // Check if the email already exists in the database
+        const existingUser = await Users.findOne({
+            where: {
+                email: email
+            }
+        });
+
+        if (existingUser) {
+            // Email already exists, send a response indicating that the user already exists
+            return res.status(400).json({ error: 'User with this email already exists' });
+        }
+
+        // Email does not exist, create a new user
+        await Users.create({
+            name: name,
+            email: email
+        });
+
+        // Send a success response
+        res.json({ success: true, message: 'User created successfully' });
+    } catch (error) {
+        // Handle any errors that occur during the database operation
+        console.error('Error creating user:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
+
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id;

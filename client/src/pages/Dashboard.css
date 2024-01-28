@@ -86,7 +86,8 @@
     float: right;
     box-sizing: border-box;
     height: 55vh;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    position: relative;
 }
 
 .myGroup>h2 {
@@ -118,4 +119,58 @@
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 25px;
+}
+
+.addGroup {
+    background-color: white;
+    border: none;
+    font-size: larger;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+.addGroup:hover {
+    color: rgb(97, 175, 183);
+
+}
+
+.timer {
+    display: flex;
+
+    /* background-color: #565555; */
+    margin-top: 20px;
+    margin-right: 60px;
+    width: 43%;
+    float: right;
+    box-sizing: border-box;
+    height: 28vh;
+    position: relative;
+    border-radius: 20px;
+    float: right;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.timer h2 {
+    font-size: 25px;
+    margin-top: 15px;
+    margin-left: 20px;
+
+}
+
+.timer-containers {
+    /* border: 1px solid black; */
+    width: 390px;
+}
+
+.line {
+    margin-top: 50px;
+    height: 70%;
+    /* Adjust the height as needed */
+    width: 1.5px;
+    /* This creates the line effect */
+    /* background-color: #616161; */
+    /* The color of the line */
+
 }

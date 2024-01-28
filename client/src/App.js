@@ -12,9 +12,9 @@ import { Dashboard } from './pages/Dashboard';
 import { Group } from './pages/Group';
 
 
-
 export const App = () => {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
