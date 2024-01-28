@@ -28,7 +28,7 @@ export const Group = () => {
                 );
             })}
             </div>
-            <div className = 'chatContainer'>Chat Box</div>
+            <div className = 'chatContainer'><h3>Group Chat</h3></div>
         </div>
     );
 }

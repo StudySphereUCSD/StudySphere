@@ -13,11 +13,13 @@ import { SlPlus } from "react-icons/sl";
 import { Timer } from '../components/Timer';
 import { TimerSetting } from '../components/TimerSetting';
 import SettingsContext from '../components/SettingsContext';
+import { useNavigate } from 'react-router-dom';
 
 
 export const Dashboard = () => {
     const [groups, setGroups] = useState([]);
     const location = useLocation();
+    let navigate = useNavigate();
     const { name, email, picture } = location.state || {};
     const userId = 1;
     useEffect(() => {
@@ -75,14 +77,14 @@ export const Dashboard = () => {
                 <button className='addGroup'><SlPlus /></button>
                 {groups.map((group, key) => {
                     return (
-                        <div className='temp' key={group.id}>
-                            <h3 className='temp' >{group.groupName}</h3>
-                            <div className='temp' >
-                                <p className='temp' >Major: {group.major}</p>
-                                <p className='temp' >Subject: {group.subject}</p>
-                                <p className='temp' >Grade Level: {group.gradeLevel}</p>
-                                <p className='temp' >Leader: {group.leader}</p>
-                            </div>
+                        <div 
+                        className='groupContainerBox' 
+                        key={group.id}
+                        onClick={()=>{
+                            navigate(`/group/${group.id}`)
+                        }}
+                        >
+                            <h3 className='groupbox' >{group.groupName}</h3>
                         </div>
                     );
                 })}
