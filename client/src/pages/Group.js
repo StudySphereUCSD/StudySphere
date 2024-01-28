@@ -18,7 +18,7 @@ export const Group = () => {
             <div className='navBar'>
                 <NavBar />
             </div>
-            <h3 className = 'userListTitle'>Group {id} User List: </h3>
+            <h3 className = 'userListTitle'>User List: </h3>
             <div className = 'userListContainer'>
             {userList.map((user, key) => {
                 return (

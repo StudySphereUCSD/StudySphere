@@ -9,8 +9,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const group = req.body;
-    await Groups.create(group);
-    res.json(group);
+    const newGroup = await Groups.create(group);
+    res.json(newGroup.id);
 });
 
 router.get('/byID/:id', async (req, res) => {
