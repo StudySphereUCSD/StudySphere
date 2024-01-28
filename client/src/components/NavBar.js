@@ -14,12 +14,17 @@ export const NavBar = () => {
         navigate('/');
         //setProfile(null);
     };
+    const create = () => {
+        navigate('/creategroup');
+        //setProfile(null);
+    };
     return (
         <div className='navbar'>
             <img className='logo' src={Logo} alt="" />
 
             <div className='buttons'>
                 <button className='logout-button' onClick={logOut}>Log Out</button>
+                <button className='create-button' onClick={create}>Create New Group</button>
 
                 <a href="/dashboard"><SlHome /></a>
                 <a href="/findgroup"><SlCompass /></a>

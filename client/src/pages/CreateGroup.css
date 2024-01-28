@@ -1,0 +1,13 @@
+.createGroupContainer{
+    border: solid 1px black;
+    width: 500px;
+    margin: auto;
+}
+
+.createGroupTitle{
+    margin-left: 680px;
+}
+
+span{
+    color: red;
+}
