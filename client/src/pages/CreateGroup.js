@@ -1,26 +1,58 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { NavBar } from "../components/NavBar";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import './CreateGroup.css'
 import axios from 'axios';
 import * as Yup from 'yup';
+// import { useLocation } from 'react-router-dom';
 
 export const CreateGroup = () => {
+    // const location = useLocation();
+    // const {email} = location.state || {};
+    // const [userId, setUserId] = useState(null);
+
+    // useEffect(() => {
+    //     if (email) {
+    //         // Assuming you have an endpoint on your server to fetch userId by email
+    //         axios.get(`http://localhost:3001/users/byEmail/${email}`)
+    //             .then((res) => {
+    //                 setUserId(res.data.userId); // Use res.data.userId instead of res.data.id
+    //             })
+    //             .catch(error => console.error('Error fetching userId:', error));
+    //     }
+    // }, [email]);
+    // // const userId = "1";
     const navigate = useNavigate();
     const initialValues = {
         groupName: "",
         major : "",
         subject: "",
         gradeLevel: "",
-        leader : ""
+        leader : "",
+        // leader : userId
     }
 
-    const onSubmit = (data) => {
-        axios.post('http://localhost:3001/groups', data).then((res) => {
-            console.log(res.data);
-            navigate(`/group/${res.data}`);
-        })
+    // const onSubmit = (data) => {
+    //     axios.post('http://localhost:3001/groups', data).then((res) => {
+    //         console.log(res.data);
+    //         navigate(`/group/${res.data}`);
+    //     })
+    // }
+    const onSubmit = async (data) => {
+        try {
+            // Post to create group
+            await axios.post('http://localhost:3001/groups', data);
+            const groupIdResponse = await axios.get('http://localhost:3001/groups/newest');
+            const groupId = groupIdResponse.data.id; // Assuming the response contains the ID of the newest group
+            const userId = "1"; 
+            await axios.post(`http://localhost:3001/groupsUsers/user/${userId}/group/${groupId}`);
+            
+            // Navigate
+            navigate(`/group/${groupId}`);
+        } catch (error) {
+            console.error('Error creating group:', error);
+        }
     }
 
     const validationSchema = Yup.object().shape({
@@ -28,7 +60,7 @@ export const CreateGroup = () => {
         major : Yup.string(),
         subject: Yup.string(),
         gradeLevel: Yup.string(),
-        leader : Yup.string()
+        leader: Yup.string()
     })
 
     return (

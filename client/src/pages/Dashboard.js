@@ -18,15 +18,31 @@ import { useNavigate } from 'react-router-dom';
 
 export const Dashboard = () => {
     const [groups, setGroups] = useState([]);
-    const location = useLocation();
     let navigate = useNavigate();
+    const location = useLocation();
     const { name, email, picture } = location.state || {};
-    const userId = 1;
+    const [userId, setUserId] = useState(null);
+
     useEffect(() => {
-        axios.get(`http://localhost:3001/groups/byUser/${userId}`).then((res) => {
-            setGroups(res.data);
-        })
-    }, []);
+        if (email) {
+            // Assuming you have an endpoint on your server to fetch userId by email
+            axios.get(`http://localhost:3001/users/byEmail/${email}`)
+                .then((res) => {
+                    setUserId(res.data.userId); // Use res.data.userId instead of res.data.id
+                })
+                .catch(error => console.error('Error fetching userId:', error));
+        }
+    }, [email]);
+    // const userId = 1;
+    useEffect(() => {
+        if (userId) {
+            axios.get(`http://localhost:3001/groupsUsers/byUser/${userId}`)
+                .then((res) => {
+                    setGroups(res.data);
+                })
+                .catch(error => console.error('Error fetching groups:', error));
+        }
+    }, [userId]);
     const [showSettings, setShowSettings] = useState(false);
     const [studyMinuites, setStudyMinuites] = useState(45);
     const [breakMinuites, setBreakMinuites] = useState(15);

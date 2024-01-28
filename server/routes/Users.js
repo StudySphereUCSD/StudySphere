@@ -47,6 +47,29 @@ router.get('/:id', async (req, res) => {
     res.json(user);
 });
 
+router.get('/byEmail/:email', async (req, res) => {
+    const { email } = req.params;
+    try {
+        // Find the user with the provided email
+        const user = await Users.findOne({ where: { email: email } });
+
+        if (user) {
+            // If user found, return the UserId
+            // console.log(`${user.id }`);
+            res.status(200).json({ userId: user.id });
+        } else {
+            // If user not found, return appropriate response
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        // If any error occurs, return internal server error
+        console.error('Error finding user by email:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+module.exports = router;
+
 router.post('/login', async (req, res) => {
     const {password, email} = req.body;
     const user = await Users.findOne({
