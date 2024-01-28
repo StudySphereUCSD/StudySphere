@@ -77,3 +77,26 @@
     color: #FC0;
     border: 2px solid #FC0;
 }
+
+.logout-button, .create-button {
+    background-color: white;
+    width: auto; /* Changed from fixed width to auto */
+    height: 30px;
+    padding: 0 10px; /* Add padding for better spacing */
+    display: inline-flex; /* Use inline-flex instead of flex */
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 800;
+    margin-right: 5px;
+    white-space: nowrap; /* Prevents text wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}
+
+.logout-button:hover, .create-button:hover {
+    color: #FC0;
+    border: 2px solid #FC0;
+}

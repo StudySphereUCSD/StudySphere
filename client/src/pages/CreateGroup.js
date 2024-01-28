@@ -43,30 +43,30 @@ export const CreateGroup = () => {
                     onSubmit = {onSubmit}
                     validationSchema = {validationSchema}>
                     <Form>
+                        <div className="formField">
                         <label>Group Name: </label>
                         <ErrorMessage name='groupName' component='span'/>
-                        <br/>
                         <Field 
                             id = 'inputCreateGroup' 
                             name = 'groupName' 
                             placeholder = 'ex. CSE Group...'
                         />
                         <br/>
-                        <label>Major: </label><br/>
+                        <label>Major: </label>
                         <Field 
                             id = 'inputCreateGroup' 
                             name = 'major' 
                             placeholder = 'ex. Computer Science...'
                         />
                         <br/>
-                        <label>Subject: </label><br/>
+                        <label>Subject: </label>
                         <Field 
                             id = 'inputCreateGroup' 
                             name = 'subject' 
                             placeholder = 'ex. CSE 100...'
                         />
                         <br/>
-                        <label>Grade Level: </label><br/>
+                        <label>Grade Level: </label>
                         <Field 
                             id = 'inputCreateGroup' 
                             name = 'gradeLevel' 
@@ -74,6 +74,7 @@ export const CreateGroup = () => {
                         />
                         <br/>
                         <button type='submit'>Create</button>
+                        </div>
                     </Form>
                 </Formik>
             </div>
