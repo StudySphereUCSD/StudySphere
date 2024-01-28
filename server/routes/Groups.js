@@ -18,6 +18,20 @@ router.get('/byID/:id', async (req, res) => {
     res.json(group);
 });
 
+router.get('/newest', async (req, res) => {
+    try {
+        const newestGroup = await Groups.findOne({
+            order: [['createdAt', 'DESC']], // Order by creation date in descending order
+            limit: 1 // Limit the result to one group
+        });
+        
+        res.json(newestGroup);
+    } catch (error) {
+        console.error('Error fetching newest group:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 router.delete('/byID/:id', async (req, res) => {
     const groupId = req.params.id;
     Groups.destroy({
@@ -39,6 +53,7 @@ router.get('/byLeader/:name', async (req, res) => {
 });
 
 router.get('/byUser/:id', async (req, res) => {
+    console.log("hi");
     const userId = req.params.id;
     const groups = await Groups.findAll({
         where: {
