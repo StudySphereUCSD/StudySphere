@@ -1,0 +1,20 @@
+.userListTitle{
+    margin: 10px;
+    margin-top: 50px;
+}
+
+.userListContainer{
+    border: solid black 1px;
+    width: 100px;
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.chatContainer{
+    border: solid black 1px;
+    margin: 20px;
+    width: 600px;
+    height: 700px;
+    margin-left: 10px;
+    padding: 10px;
+}

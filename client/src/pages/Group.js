@@ -2,6 +2,7 @@ import React from 'react'
 import { NavBar } from "../components/NavBar";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import './Group.css'
 import axios from 'axios';
 
 export const Group = () => {
@@ -17,8 +18,8 @@ export const Group = () => {
             <div className='navBar'>
                 <NavBar />
             </div>
-            <div>Group {id} User List: </div>
-            <div>
+            <h3 className = 'userListTitle'>Group {id} User List: </h3>
+            <div className = 'userListContainer'>
             {userList.map((user, key) => {
                 return (
                     <div className='userContainer' >
@@ -27,6 +28,7 @@ export const Group = () => {
                 );
             })}
             </div>
+            <div className = 'chatContainer'>Chat Box</div>
         </div>
     );
 }
