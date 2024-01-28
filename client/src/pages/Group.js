@@ -9,7 +9,7 @@ export const Group = () => {
     let { id } = useParams();
     const [userList, setUserList] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:3001/users/byGroup/${id}`).then((response) => {
+        axios.get(`http://localhost:3001/groupsUsers/byGroup/${id}`).then((response) => {
             setUserList(response.data);
         });
     }, []);

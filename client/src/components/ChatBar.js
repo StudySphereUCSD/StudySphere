@@ -3,17 +3,53 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ChatRoom.css';
 import { SlEnvolope } from "react-icons/sl";
+import { useLocation } from 'react-router-dom';
 
 const ChatBar = ({ socket, setSelectedGroupId }) => {
     const [groups, setGroups] = useState([]);
+    const [userData, setUserData] = useState({ name: '', email: '', picture: '' });
+    const [userId, setUserId] = useState(null);
+    const location = useLocation();
 
-
-    const userId = 1;
     useEffect(() => {
-        axios.get(`http://localhost:3001/groups/byUser/${userId}`).then((res) => {
-            setGroups(res.data);
-        })
-    }, [socket]);
+        // Check local storage first
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            const user = JSON.parse(storedUserData);
+            setUserData(user);
+            fetchUserId(user.email);
+        } else if (location.state) {
+            // If not in local storage, use location state and update local storage
+            const { name, email, picture } = location.state;
+            setUserData({ name, email, picture });
+            localStorage.setItem('userData', JSON.stringify({ name, email, picture }));
+            fetchUserId(email);
+        }
+    }, [location.state]);
+    const fetchUserId = (email) => {
+        if (email) {
+            axios.get(`http://localhost:3001/users/byEmail/${email}`)
+                .then((res) => {
+                    setUserId(res.data.userId);
+                })
+                .catch(error => console.error('Error fetching userId:', error));
+        }
+    };
+
+    // useEffect(() => {
+    //     axios.get(`http://localhost:3001/groups/byUser/${userId}`).then((res) => {
+    //         setGroups(res.data);
+    //     })
+    // }, [socket]);
+    useEffect(() => {
+        if (userId) {
+            axios.get(`http://localhost:3001/groupsUsers/byUser/${userId}`)
+                .then((res) => {
+                    setGroups(res.data);
+                })
+                .catch(error => console.error('Error fetching groups:', error));
+        }
+    }, [userId]);
 
     const handleGroupClick = (groupId) => {
         setSelectedGroupId(groupId);

@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const ChatFooter = ({ socket, selectedGroupId }) => {
     const [message, setMessage] = useState('');
     const [me, setMe] = useState(null);
-
+    const [userData, setUserData] = useState({ name: '', email: '', picture: '' });
+    const location = useLocation();
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/users/1`)
-            .then((res) => {
-                const userData = res.data;
-                setMe(userData.name); // Assuming your user object has a "name" property
-            })
-            .catch((error) => {
-                console.error('Error fetching user data:', error);
-            });
-    }, []);
+        // Check local storage first
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            const user = JSON.parse(storedUserData);
+            setUserData(user);
+            setMe(user.name)
+        } else if (location.state) {
+            // If not in local storage, use location state and update local storage
+            const { name, email, picture } = location.state;
+            setUserData({ name, email, picture });
+            localStorage.setItem('userData', JSON.stringify({ name, email, picture }));
+            setMe(name)
+        }
+    }, [location.state]);
 
     // const handleSendMessage = (e) => {
     //     e.preventDefault();

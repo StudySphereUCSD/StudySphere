@@ -46,9 +46,19 @@ export const Dashboard = () => {
         }
     };
 
+    // useEffect(() => {
+    //     if (userId) {
+    //         axios.get(`http://localhost:3001/groups/byUser/${userId}`)
+    //             .then((res) => {
+    //                 setGroups(res.data);
+    //             })
+    //             .catch(error => console.error('Error fetching groups:', error));
+    //     }
+    // }, [userId]);
+
     useEffect(() => {
         if (userId) {
-            axios.get(`http://localhost:3001/groups/byUser/${userId}`)
+            axios.get(`http://localhost:3001/groupsUsers/byUser/${userId}`)
                 .then((res) => {
                     setGroups(res.data);
                 })

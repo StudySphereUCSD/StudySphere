@@ -5,25 +5,40 @@ import { useNavigate } from 'react-router-dom';
 import './CreateGroup.css'
 import axios from 'axios';
 import * as Yup from 'yup';
-// import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export const CreateGroup = () => {
-    // const location = useLocation();
-    // const {email} = location.state || {};
-    // const [userId, setUserId] = useState(null);
+    const [userData, setUserData] = useState({ name: '', email: '', picture: '' });
+    const [userId, setUserId] = useState(null);
 
-    // useEffect(() => {
-    //     if (email) {
-    //         // Assuming you have an endpoint on your server to fetch userId by email
-    //         axios.get(`http://localhost:3001/users/byEmail/${email}`)
-    //             .then((res) => {
-    //                 setUserId(res.data.userId); // Use res.data.userId instead of res.data.id
-    //             })
-    //             .catch(error => console.error('Error fetching userId:', error));
-    //     }
-    // }, [email]);
-    // // const userId = "1";
-    const navigate = useNavigate();
+    let navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        // Check local storage first
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            const user = JSON.parse(storedUserData);
+            setUserData(user);
+            fetchUserId(user.email);
+        } else if (location.state) {
+            // If not in local storage, use location state and update local storage
+            const { name, email, picture } = location.state;
+            setUserData({ name, email, picture });
+            localStorage.setItem('userData', JSON.stringify({ name, email, picture }));
+            fetchUserId(email);
+        }
+    }, [location.state]);
+    const fetchUserId = (email) => {
+        if (email) {
+            axios.get(`http://localhost:3001/users/byEmail/${email}`)
+                .then((res) => {
+                    setUserId(res.data.userId);
+                })
+                .catch(error => console.error('Error fetching userId:', error));
+        }
+    };
+    // const navigate = useNavigate();
     const initialValues = {
         groupName: "",
         major: "",
@@ -45,7 +60,7 @@ export const CreateGroup = () => {
             await axios.post('http://localhost:3001/groups', data);
             const groupIdResponse = await axios.get('http://localhost:3001/groups/newest');
             const groupId = groupIdResponse.data.id; // Assuming the response contains the ID of the newest group
-            const userId = "1";
+            // const userId = "1";
             await axios.post(`http://localhost:3001/groupsUsers/user/${userId}/group/${groupId}`);
 
             // Navigate
