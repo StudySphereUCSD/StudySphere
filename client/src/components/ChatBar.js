@@ -5,7 +5,7 @@ import './ChatRoom.css';
 import { SlEnvolope } from "react-icons/sl";
 import { useLocation } from 'react-router-dom';
 
-const ChatBar = ({ socket, setSelectedGroupId }) => {
+const ChatBar = ({ socket, setSelectedGroupId, setSelectedGroupName }) => {
     const [groups, setGroups] = useState([]);
     const [userData, setUserData] = useState({ name: '', email: '', picture: '' });
     const [userId, setUserId] = useState(null);
@@ -51,9 +51,13 @@ const ChatBar = ({ socket, setSelectedGroupId }) => {
         }
     }, [userId]);
 
-    const handleGroupClick = (groupId) => {
+    const handleGroupClick = (groupId, groupName) => {
         setSelectedGroupId(groupId);
+        setSelectedGroupName(groupName);
+        console.log(groupName);
         socket.emit('join group', groupId); // Emitting an event when a group is selected
+        // Call the function passed as a prop to send the groupName information to another component
+       
     };
 
 
@@ -65,7 +69,7 @@ const ChatBar = ({ socket, setSelectedGroupId }) => {
                 <h4 className="chat__header"></h4>
                 <div className="chat__users">
                     {groups.map(group => (
-                        <p key={group.id} onClick={() => handleGroupClick(group.id)}>
+                        <p key={group.id} onClick={() => handleGroupClick(group.id, group.groupName)} className="group-item">
                             {group.groupName} ({group.subject})
                         </p>
                     ))}

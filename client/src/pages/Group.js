@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Group.css'
 import axios from 'axios';
+import Webcam from "react-webcam";
 
 export const Group = () => {
     let { id } = useParams();
@@ -28,7 +29,14 @@ export const Group = () => {
                     );
                 })}
             </div>
-            <div className='chatContainer'><h3>Group Chat</h3></div>
+            <div className='chatContainer'><h3>Group Call</h3>
+                <Webcam
+                    className='webcam'
+                     height={360}
+                     width={540}
+
+                />
+            </div>
         </div>
     );
 }

@@ -24,6 +24,11 @@
     margin-right:50px;
 }
 
+.webcam {
+    margin: auto;
+    margin-left: 300px;
+}
+
 .chatContainer>h3{
     margin-top: 5px;
     margin-left: 530px;

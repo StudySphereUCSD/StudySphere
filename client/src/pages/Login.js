@@ -111,17 +111,7 @@ export const Login = () => {
                 <a className='button' href="/"> <SlArrowLeft /> &nbsp; Back to main page</a>
             </div>
 
-            {profile ? (
-                <div>
-                    <img src={profile.picture} alt="user image" />
-                    <h3>User Logged in</h3>
-                    <p>Name: {profile.name}</p>
-                    <p>Email Address: {profile.email}</p>
-                    <br />
-                    <br />
-                    <button onClick={logOut}>Log out</button>
-                </div>
-            ) : (
+            
                 <div className='loginBox'>
                     <img className='biglogo' src={Logo2} alt="" />
                     <h2>Welcome to STUDYSPHERE!</h2>
@@ -129,7 +119,7 @@ export const Login = () => {
                         <button className='google-login-button' onClick={() => login()}><SlSocialGoogle />  &nbsp;SIGN IN WITH GOOGLE</button>
                     </div>
                 </div>
-            )}
+            
         </div>
     );
 }

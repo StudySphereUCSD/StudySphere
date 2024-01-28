@@ -1,5 +1,5 @@
 .groupContainer {
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(251, 251, 251);
     width: 250px;
     height: 250px;
     padding: 10px;
@@ -14,18 +14,27 @@
     transform: translateY(-5px);
 }
 
-.groupContainer>h3 {
-    margin-left: 80px;
+.groupContainer > h3 {
+    color:rgb(28, 28, 28);
+    margin-top: 30px;
+    margin-left: auto; /* Align center horizontally */
+    margin-right: auto; /* Align center horizontally */
+    font-size: 32px;
+    padding: 5px;
+    width: 160px;
+    text-align: center; /* Center the text inside the h3 element */
 }
 
 .infoContainer {
-    margin-left: 20px;
-    background-color: rgb(255, 255, 255);
+    color:rgb(28, 28, 28);
+    font-family:Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+    margin-top: 70px;
     width: 180px;
     height: 120px;
-    padding: 10px;
+    padding: 5px;
     border-radius: 10px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
 }
 
 .info {
