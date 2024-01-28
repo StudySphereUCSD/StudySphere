@@ -33,27 +33,27 @@ export const CreateGroup = () => {
         // leader : userId
     }
 
-    // const onSubmit = (data) => {
-    //     axios.post('http://localhost:3001/groups', data).then((res) => {
-    //         console.log(res.data);
-    //         navigate(`/group/${res.data}`);
-    //     })
-    // }
-    const onSubmit = async (data) => {
-        try {
-            // Post to create group
-            await axios.post('http://localhost:3001/groups', data);
-            const groupIdResponse = await axios.get('http://localhost:3001/groups/newest');
-            const groupId = groupIdResponse.data.id; // Assuming the response contains the ID of the newest group
-            const userId = "1";
-            await axios.post(`http://localhost:3001/groupsUsers/user/${userId}/group/${groupId}`);
-
-            // Navigate
-            navigate(`/group/${groupId}`);
-        } catch (error) {
-            console.error('Error creating group:', error);
-        }
+    const onSubmit = (data) => {
+        axios.post('http://localhost:3001/groups', data).then((res) => {
+            console.log(res.data);
+            navigate(`/group/${res.data}`);
+        })
     }
+    // const onSubmit = async (data) => {
+    //     try {
+    //         // Post to create group
+    //         await axios.post('http://localhost:3001/groups', data);
+    //         const groupIdResponse = await axios.get('http://localhost:3001/groups/newest');
+    //         const groupId = groupIdResponse.data.id; // Assuming the response contains the ID of the newest group
+    //         const userId = "1";
+    //         await axios.post(`http://localhost:3001/groups/byUser/${userId}`);
+
+    //         // Navigate
+    //         navigate(`/group/${groupId}`);
+    //     } catch (error) {
+    //         console.error('Error creating group:', error);
+    //     }
+    // }
 
     const validationSchema = Yup.object().shape({
         groupName: Yup.string().required('You must input a group name!'),

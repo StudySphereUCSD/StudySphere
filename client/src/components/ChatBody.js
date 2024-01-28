@@ -44,9 +44,7 @@ const ChatBody = ({ socket, selectedGroupId }) => {
 
     return (
         <>
-            <header className="chat__mainHeader">
-                {/* Header content */}
-            </header>
+
 
             <div className="message__container">
 

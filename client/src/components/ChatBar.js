@@ -35,7 +35,15 @@ const ChatBar = ({ socket, setSelectedGroupId }) => {
                     ))}
                 </div>
             </div>
+
+            <div className='group-name'>
+                {groups.map(group => (
+                    <h2>{group.groupName}</h2>
+                ))}
+                {/* <h2>da</h2> */}
+            </div>
         </div>
+
     );
 };
 
