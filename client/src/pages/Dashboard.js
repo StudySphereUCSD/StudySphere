@@ -48,7 +48,7 @@ export const Dashboard = () => {
 
     useEffect(() => {
         if (userId) {
-            axios.get(`http://localhost:3001/groupsUsers/byUser/${userId}`)
+            axios.get(`http://localhost:3001/groups/byUser/${userId}`)
                 .then((res) => {
                     setGroups(res.data);
                 })
@@ -63,7 +63,7 @@ export const Dashboard = () => {
         { weekday: 4, hours: 3 },
         { weekday: 5, hours: 7 },
         { weekday: 6, hours: 4 },
-        { weekday: 7, hours: 1 }
+        { weekday: 7, hours: 1 },
         // ... other data
     ];
 

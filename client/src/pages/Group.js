@@ -9,7 +9,7 @@ export const Group = () => {
     let { id } = useParams();
     const [userList, setUserList] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:3001/groupsUsers/byGroup/${id}`).then((response) => {
+        axios.get(`http://localhost:3001/users/byGroup/${id}`).then((response) => {
             setUserList(response.data);
         });
     }, []);
@@ -18,17 +18,17 @@ export const Group = () => {
             <div className='navBar'>
                 <NavBar />
             </div>
-            <h3 className = 'userListTitle'>User List: </h3>
-            <div className = 'userListContainer'>
-            {userList.map((user, key) => {
-                return (
-                    <div className='userContainer' >
-                        <p className = 'userName'>{user.name}</p>
-                    </div>
-                );
-            })}
+            <h3 className='userListTitle'>User List: </h3>
+            <div className='userListContainer'>
+                {userList.map((user, key) => {
+                    return (
+                        <div className='userContainer' >
+                            <p className='userName'>{user.name}</p>
+                        </div>
+                    );
+                })}
             </div>
-            <div className = 'chatContainer'><h3>Group Chat</h3></div>
+            <div className='chatContainer'><h3>Group Chat</h3></div>
         </div>
     );
 }

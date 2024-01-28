@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ChatRoom.css';
+import { SlEnvolope } from "react-icons/sl";
 
 const ChatBar = ({ socket, setSelectedGroupId }) => {
     const [groups, setGroups] = useState([]);
@@ -22,10 +23,10 @@ const ChatBar = ({ socket, setSelectedGroupId }) => {
 
     return (
         <div className="chat__sidebar">
-            <h2>Open Chat</h2>
+            <h2><SlEnvolope />&nbsp;Your Groups</h2>
 
             <div>
-                <h4 className="chat__header">YOUR GROUPS</h4>
+                <h4 className="chat__header"></h4>
                 <div className="chat__users">
                     {groups.map(group => (
                         <p key={group.id} onClick={() => handleGroupClick(group.id)}>

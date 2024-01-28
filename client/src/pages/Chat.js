@@ -22,7 +22,7 @@ export const Chat = () => {
 
 
     return (
-        <div>
+        <div className='scrollable-div'>
             <NavBar />
             <div className="chat">
                 <ChatBar socket={socket} setSelectedGroupId={setSelectedGroupId} />
