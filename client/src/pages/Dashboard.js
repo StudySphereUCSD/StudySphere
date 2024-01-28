@@ -4,7 +4,7 @@ import './Dashboard.css'
 import { SlPencil } from "react-icons/sl";
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
     VictoryBar, VictoryChart, VictoryAxis,
     VictoryTheme
